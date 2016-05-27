@@ -1,10 +1,9 @@
 class CorgiPerk
 
   def initialize(perk_id, shopping_list)
-    @id = perk_id
+    @id = perk_id.to_i
     @shopping_list = shopping_list
   end
-
 
   def method_missing(method_name, *args)
     name = method_name.to_s
@@ -25,22 +24,29 @@ class CorgiPerk
     info = @shopping_list.send("get_#{item}_info", @id)
     happiness = @shopping_list.send("get_#{item}_happiness", @id)
 
-    result = "#{item}: #{info}: #{happiness}"
+    result = "#{item}: #{info}: #{happiness} licks!"
     happiness > 30 ? "* #{result}" : result
 
+    p result
+
+    p happiness
+
     return happiness
+  end
+
+  def shopping_list
+    p @shopping_list
   end
 end
 
 class ShoppingList
+  #second number is the happiness in "licks"
   ITEM_LIST = {
-    10: ["Phoenician rawhide", "40 licks"]
+    10 => ["Phoenician rawhide", 40]
   }
-
 
   def initialize
     @id = nil
-    create_database
   end
 
   def method_missing(method_name, perk_id)
@@ -75,9 +81,7 @@ class ShoppingList
   end
 end
 
-
-
-
+#The original stuff
   # def bone
   #   info = @shopping_list.get_bone_info(@id)
   #   happiness = @shopping_list.get_bone_happiness(@id)
