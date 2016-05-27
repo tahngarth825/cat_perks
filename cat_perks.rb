@@ -1,10 +1,10 @@
 #Functional, as of 9:02 PM, 5/26/16
 #In pry, try:
 #list = ShoppingList.new
-#Rich = CorgiPerk.new(10, list)
-#Rich.bone
+#Rich = CatPerks.new(1, list)
+#Rich.food
 
-class CorgiPerk
+class CatPerks
   def initialize(perk_id, shopping_list)
     @id = perk_id.to_i
     @shopping_list = shopping_list
@@ -16,10 +16,10 @@ class CorgiPerk
     info = ""
     happiness = 0
 
-    if name == "bone"
-      item = "bone"
-    elsif name == "kibble"
-      item = "kibble"
+    if name == "food"
+      item = "food"
+    elsif name == "toy"
+      item = "toy"
     elsif name = silly_outfit
       item = "silly_outfit"
     else
@@ -29,7 +29,7 @@ class CorgiPerk
     info = @shopping_list.send("get_#{item}_info", @id)
     happiness = @shopping_list.send("get_#{item}_happiness", @id)
 
-    result = "#{item}: #{info}: #{happiness} licks!"
+    result = "#{item}: #{info}: #{happiness} purrs!"
     happiness > 30 ? "* #{result}" : result
 
     return happiness
@@ -42,8 +42,8 @@ end
 
 class ShoppingList
   #second number is the happiness in "licks"
-  ITEM_LIST = {
-    10 => ["Phoenician rawhide", 40]
+  FOOD_LIST = {
+    1 => ["Catnip", 40]
   }
 
   def initialize
@@ -59,12 +59,12 @@ class ShoppingList
 
     if name.start_with?("get_") && name.length >= 5
       name = name[4..-1]
-      if name.start_with?("bone_") && name.length >= 6
-        item = "bone"
+      if name.start_with?("food_") && name.length >= 6
+        item = "food"
         name = name[5..-1]
-      elsif name.start_with?("kibble_") && name.length >= 8
-        item = "kibble"
-        name = name[7..-1]
+      elsif name.start_with?("toy_") && name.length >= 5
+        item = "toy"
+        name = name[4..-1]
       elsif name.start_with?("silly_outfit_") && name.length >= 14
         item = "silly outfit"
         name = name[14..-1]
@@ -83,7 +83,7 @@ class ShoppingList
 end
 
 #The original stuff
-  # def bone
+  # def food
   #   info = @shopping_list.get_bone_info(@id)
   #   happiness = @shopping_list.get_bone_happiness(@id)
   #   result = "Bone: #{info}: #{happiness}"
