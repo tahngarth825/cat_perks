@@ -1,13 +1,26 @@
+<<<<<<< HEAD
 #Functional, as of 10:48 PM, 5/26/16
+=======
+#Functional, as of 10:00PM, 5/26/16
+#Uncomment some of the bottom portion of the file to run this!
+>>>>>>> master
 
 #require "byebug"
 
 class CatPerks
   #invisible: :id and :shopping_list
+<<<<<<< HEAD
   attr_accessor :name, :breed
 
   def initialize
     @shopping_list = ShoppingList.new
+=======
+  attr_accessor :name
+
+  def initialize(perk_id, shopping_list)
+    @id = perk_id.to_i
+    @shopping_list = shopping_list
+>>>>>>> master
   end
 
   def method_missing(method_name, *args)
@@ -33,6 +46,7 @@ class CatPerks
     end
 
     return result
+<<<<<<< HEAD
   end
 
   def play
@@ -64,7 +78,17 @@ class CatPerks
 
     puts "What would you like to purchase?"
     #in progress
+=======
+>>>>>>> master
   end
+
+  # def play
+  #   puts "Hello, and welcome to CatPerks! Choose a name for your adorable kitty:"
+  #   @name = gets.chomp
+  #
+  #   puts "You've chosen "
+  #
+  # end
 
   def shopping_list
     @shopping_list.items_and_prices
@@ -72,6 +96,7 @@ class CatPerks
 end
 
 class ShoppingList
+<<<<<<< HEAD
   #first number is item number, second number is how much purrs it's worth,
   #and third number is price
   ITEM_LIST = {
@@ -80,6 +105,15 @@ class ShoppingList
     "toy" => {1 => ["Yarnball", 50, 25]},
 
     "silly outfit" => {1 => ["Hand-knitted sweater", 25, 0]}
+=======
+  #second number is the happiness in "purrs"
+  ITEM_LIST = {
+    "food" => {1 => ["Catnip", 40]},
+
+    "toy" => {1 => ["Yarnball", 25]},
+
+    "silly outfit" => {1 => ["Hand-knitted sweater", 0]}
+>>>>>>> master
   }
 
   def items_and_prices
@@ -120,7 +154,11 @@ class ShoppingList
       if name == "info"
         return ITEM_LIST[type][@id][0]
       elsif name == "happiness"
+<<<<<<< HEAD
         return ITEM_LIST[type][@id][2]
+=======
+        return ITEM_LIST[type][@id][1]
+>>>>>>> master
       end
 
     else
@@ -141,7 +179,21 @@ class ShoppingList
   end
 end
 
+<<<<<<< HEAD
 if __FILE__ == $PROGRAM_NAME
   new_game = CatPerks.new
   new_game.play
 end
+=======
+# if __FILE__ == $PROGRAM_NAME
+#   a = ShoppingList.new
+#   Rich = CatPerks.new(1, a)
+# p  Rich.food
+# p  Rich.toy
+# p  Rich.silly_outfit
+# end
+
+# if __FILE__ == $PROGRAM_NAME
+#   CatPerks.play
+# end
+>>>>>>> master
