@@ -1,5 +1,10 @@
-class CorgiPerk
+#Functional, as of 9:02 PM, 5/26/16
+#In pry, try:
+#list = ShoppingList.new
+#Rich = CorgiPerk.new(10, list)
+#Rich.bone
 
+class CorgiPerk
   def initialize(perk_id, shopping_list)
     @id = perk_id.to_i
     @shopping_list = shopping_list
@@ -26,10 +31,6 @@ class CorgiPerk
 
     result = "#{item}: #{info}: #{happiness} licks!"
     happiness > 30 ? "* #{result}" : result
-
-    p result
-
-    p happiness
 
     return happiness
   end
