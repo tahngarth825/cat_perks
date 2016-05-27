@@ -1,14 +1,12 @@
-#Functional, as of 9:02 PM, 5/26/16
-#In pry, try:
-#list = ShoppingList.new
-#Rich = CatPerks.new(1, list)
-#Rich.food
-
-#Or just run this file as a ruby file, since I wrote some commands on the bottom
+#Functional, as of 10:00PM, 5/26/16
+#Uncomment some of the bottom portion of the file to run this!
 
 #require "byebug"
 
 class CatPerks
+  #invisible: :id and :shopping_list
+  attr_accessor :name
+
   def initialize(perk_id, shopping_list)
     @id = perk_id.to_i
     @shopping_list = shopping_list
@@ -16,15 +14,12 @@ class CatPerks
 
   def method_missing(method_name, *args)
     name = method_name.to_s
-    item = ""
-    info = ""
-    happiness = 0
 
     if name == "food"
       item = "food"
     elsif name == "toy"
       item = "toy"
-    elsif name = silly_outfit
+    elsif name == "silly_outfit"
       item = "silly_outfit"
     else
       super
@@ -36,11 +31,19 @@ class CatPerks
     result = "#{item}: #{info}: #{happiness} purrs!"
 
     if happiness > 30
-      result = "* #{result}"
+      result = "Wonderful #{result}!!"
     end
 
     return result
   end
+
+  # def play
+  #   puts "Hello, and welcome to CatPerks! Choose a name for your adorable kitty:"
+  #   @name = gets.chomp
+  #
+  #   puts "You've chosen "
+  #
+  # end
 
   def shopping_list
     p @shopping_list
@@ -48,7 +51,7 @@ class CatPerks
 end
 
 class ShoppingList
-  #second number is the happiness in "licks"
+  #second number is the happiness in "purrs"
   ITEM_LIST = {
     "food" => {1 => ["Catnip", 40]},
 
@@ -63,7 +66,6 @@ class ShoppingList
 
   def method_missing(method_name, perk_id)
     name = method_name.to_s
-    type = ""
     @id = perk_id
 
     raise StandardError("Invalid ID!") unless valid_id?
@@ -105,34 +107,14 @@ class ShoppingList
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
-  list = ShoppingList.new
-  rich = CatPerks.new(1,list)
-  puts rich.food
-end
+# if __FILE__ == $PROGRAM_NAME
+#   a = ShoppingList.new
+#   Rich = CatPerks.new(1, a)
+# p  Rich.food
+# p  Rich.toy
+# p  Rich.silly_outfit
+# end
 
-
-
-
-
-#The original stuff
-  # def food
-  #   info = @shopping_list.get_bone_info(@id)
-  #   happiness = @shopping_list.get_bone_happiness(@id)
-  #   result = "Bone: #{info}: #{happiness}"
-  #   happiness > 30 ? "* #{result}" : result
-  # end
-  #
-  # def kibble
-  #   info = @shopping_list.get_kibble_info(@id)
-  #   happiness = @shopping_list.get_kibble_happiness(@id)
-  #   result = "Kibble: #{info}: #{happiness}"
-  #   happiness > 30 ? "* #{result}" : result
-  # end
-  #
-  # def silly_outfit
-  #   info = @shopping_list.get_silly_outfit_info(@id)
-  #   happiness = @shopping_list.get_silly_outfit_happiness(@id)
-  #   result = "Silly Outfit: #{info}: #{happiness}"
-  #   happiness > 30 ? "* #{result}" : result
-  # end
+# if __FILE__ == $PROGRAM_NAME
+#   CatPerks.play
+# end
